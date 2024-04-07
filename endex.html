@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R7</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Estilos adicionales para organizar las materias en filas */
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .row {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .col {
+      margin-left: 10px; /* Espacio entre las materias */
+    }
+
+    .col:first-child {
+      margin-left: 0; /* No hay margen izquierdo para el primer elemento de la fila */
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="container">
+      <h2>R7</h2>
+    </div>
+  </div>
+  
+   <!-- 1 cuatrimestre -->
+   <div class="container">
+    <h1>1 cuatrimestre</h1>
+    <form id="materiasForm1">
+      <!-- Materias del primer cuatrimestre -->
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia1_1" name="materias1[]" value="LENGUA ESPAÑOLA I">
+          <label for="materia1_1">LENGUA ESPAÑOLA I</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia1_2" name="materias1[]" value="ALGORITMOS COMPUTACIONALES">
+          <label for="materia1_2">ALGORITMOS COMPUTACIONALES</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia1_3" name="materias1[]" value="INGLES I">
+          <label for="materia1_3">INGLES I</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia1_4" name="materias1[]" value="MATEMATICA DISCRETA">
+          <label for="materia1_4">MATEMATICA DISCRETA</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia1_5" name="materias1[]" value="PRE-CALCULO">
+          <label for="materia1_5">PRE-CALCULO</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia1_6" name="materias1[]" value="QUIMICA INORGANICA I">
+          <label for="materia1_6">QUIMICA INORGANICA I</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia1_7" name="materias1[]" value="LAB. QUIM. INORGAN. I">
+          <label for="materia1_7">LAB. QUIM. INORGAN. I</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia1_8" name="materias1[]" value="ORIENTACION UNIVERSITARIA">
+          <label for="materia1_8">ORIENTACION UNIVERSITARIA</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia1_9" name="materias1[]" value="REFLEXION FILOSOFICA">
+          <label for="materia1_9">REFLEXION FILOSOFICA</label>
+        </div>
+      </div>
+      <button type="submit" onclick="saveData(event, 'materiasForm1')">Guardar Materias</button>
+    </form>
+  </div>
+  
+  <!-- 2 cuatrimestre -->
+  <div class="container">
+    <h1>2 cuatrimestre</h1>
+    <form id="materiasForm2">
+      <!-- Materias del segundo cuatrimestre -->
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia2_1" name="materias2[]" value="LENGUA ESPAÑOLA II">
+          <label for="materia2_1">LENGUA ESPAÑOLA II</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia2_2" name="materias2[]" value="PROGRAMACION I">
+          <label for="materia2_2">PROGRAMACION I</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia2_3" name="materias2[]" value="LAB PROGRAMACION I">
+          <label for="materia2_3">LAB PROGRAMACION I</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia2_4" name="materias2[]" value="LOGICA COMPUTACIONAL">
+          <label for="materia2_4">LOGICA COMPUTACIONAL</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia2_5" name="materias2[]" value="INGLES II">
+          <label for="materia2_5">INGLES II</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia2_6" name="materias2[]" value="CALCULO I">
+          <label for="materia2_6">CALCULO I</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia2_7" name="materias2[]" value="FISICA I">
+          <label for="materia2_7">FISICA I</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia2_8" name="materias2[]" value="LAB. FISICA I">
+          <label for="materia2_8">LAB. FISICA I</label>
+        </div>
+      </div>
+      <button type="submit" onclick="saveData(event, 'materiasForm2')">Guardar Materias</button>
+    </form>
+  </div>
+
+  <!-- 3 cuatrimestre -->
+  <div class="container">
+    <h1>3 cuatrimestre</h1>
+    <form id="materiasForm3">
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia3_1" name="materias3[]" value="REDACCION PROFESIONAL">
+          <label for="materia3_1">REDACCION PROFESIONAL</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia3_2" name="materias3[]" value="ANALISIS DE SISTEMAS">
+          <label for="materia3_2">ANALISIS DE SISTEMAS</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia3_3" name="materias3[]" value="PROGRAMACION II">
+          <label for="materia3_3">PROGRAMACION II</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia3_4" name="materias3[]" value="LAB PROGRAMACION II">
+          <label for="materia3_4">LAB PROGRAMACION II</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia3_5" name="materias3[]" value="INGLES III">
+          <label for="materia3_5">INGLES III</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia3_6" name="materias3[]" value="LOGICA MATEMATICA">
+          <label for="materia3_6">LOGICA MATEMATICA</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia3_7" name="materias3[]" value="CALCULO II">
+          <label for="materia3_7">CALCULO II</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia3_8" name="materias3[]" value="FISICA II">
+          <label for="materia3_8">FISICA II</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia3_9" name="materias3[]" value="LAB FISICA II">
+          <label for="materia3_9">LAB FISICA II</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia3_10" name="materias3[]" value="METODOLOGIA DE LA INVESTIGACION I">
+          <label for="materia3_10">METODOLOGIA DE LA INVESTIGACION I</label>
+        </div>
+      </div>
+      <button type="submit" onclick="saveData(event, 'materiasForm3')">Guardar Materias</button>
+    </form>
+  </div>
+
+  <!-- 4 cuatrimestre -->
+  <div class="container">
+    <h1>4 cuatrimestre</h1>
+    <form id="materiasForm4">
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia4_1" name="materias4[]" value="ELECTRICIDAD BASICA">
+          <label for="materia4_1">ELECTRICIDAD BASICA</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia4_2" name="materias4[]" value="TALLER ELECT. BASICA">
+          <label for="materia4_2">TALLER ELECT. BASICA</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia4_3" name="materias4[]" value="DISEÑO DE SISTEMAS">
+          <label for="materia4_3">DISEÑO DE SISTEMAS</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia4_4" name="materias4[]" value="PROGRAMACION III">
+          <label for="materia4_4">PROGRAMACION III</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia4_5" name="materias4[]" value="LAB. DE PROGRAMACION III">
+          <label for="materia4_5">LAB. DE PROGRAMACION III</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia4_6" name="materias4[]" value="BASE DE DATOS I">
+          <label for="materia4_6">BASE DE DATOS I</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia4_7" name="materias4[]" value="LAB. DE BASE DE DATOS I">
+          <label for="materia4_7">LAB. DE BASE DE DATOS I</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia4_8" name="materias4[]" value="INGLES IV">
+          <label for="materia4_8">INGLES IV</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia4_9" name="materias4[]" value="FUNDAMENTOS DE ESTADISTICA">
+          <label for="materia4_9">FUNDAMENTOS DE ESTADISTICA</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia4_10" name="materias4[]" value="CALCULO III">
+          <label for="materia4_10">CALCULO III</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia4_11" name="materias4[]" value="METODOLOGIA INVE. II">
+          <label for="materia4_11">METODOLOGIA INVE. II</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia4_12" name="materias4[]" value="TEMAS DE HISTORIA DOMINICANA">
+          <label for="materia4_12">TEMAS DE HISTORIA DOMINICANA</label>
+        </div>
+      </div>
+      <button type="submit" onclick="saveData(event, 'materiasForm4')">Guardar Materias</button>
+    </form>
+  </div>
+
+  <!-- 5 cuatrimestre -->
+  <div class="container">
+    <h1>5 cuatrimestre</h1>
+    <form id="materiasForm5">
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia5_1" name="materias5[]" value="DIBUJO TECNICO">
+          <label for="materia5_1">DIBUJO TECNICO</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia5_2" name="materias5[]" value="SEGURIDAD E HIGIENE INDUSTRIAL">
+          <label for="materia5_2">SEGURIDAD E HIGIENE INDUSTRIAL</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia5_3" name="materias5[]" value="ARQUITECTURA COMPUTACIONAL">
+          <label for="materia5_3">ARQUITECTURA COMPUTACIONAL</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia5_4" name="materias5[]" value="LAB. DE ARQUITECTURA COMPUTACIONAL">
+          <label for="materia5_4">LAB. DE ARQUITECTURA COMPUTACIONAL</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia5_5" name="materias5[]" value="BASE DE DATOS II">
+          <label for="materia5_5">BASE DE DATOS II</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia5_6" name="materias5[]" value="LAB. DE BASE DE DATOS II">
+          <label for="materia5_6">LAB. DE BASE DE DATOS II</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="checkbox" id="materia5_7" name="materias5[]" value="DISEÑO Y PROGRAMACION DE PAGINAS WEB">
+          <label for="materia5_7">DISEÑO Y PROGRAMACION DE PAGINAS WEB</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia5_8" name="materias5[]" value="CALCULO IV">
+          <label for="materia5_8">CALCULO IV</label>
+        </div>
+        <div class="col">
+          <input type="checkbox" id="materia5_9" name="materias5[]" value="CIUDADANIA Y GLOBALIZACION">
+          <label for="materia5_9">CIUDADANIA Y GLOBALIZACION</label>
+        </div>
+      </div>
+      <button type="submit" onclick="saveData(event, 'materiasForm5')">Guardar Materias</button>
+    </form>
+  </div>
+
+ <!-- 6 cuatrimestre -->
+<div class="container">
+  <h1>6 cuatrimestre</h1>
+  <form id="materiasForm6">
+    <!-- Materias del sexto cuatrimestre -->
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia6_1" name="materias6[]" value="SISTEMA OPERATIVO I">
+        <label for="materia6_1">SISTEMA OPERATIVO I</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia6_2" name="materias6[]" value="LAB SISTEMA OPERATIVO I">
+        <label for="materia6_2">LAB SISTEMA OPERATIVO I</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia6_3" name="materias6[]" value="ALGORITMOS Y ESTRUCTURA DE DATOS">
+        <label for="materia6_3">ALGORITMOS Y ESTRUCTURA DE DATOS</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia6_4" name="materias6[]" value="LAB. DE ALGORITMOS Y ESTRUCTURA DE DATOS">
+        <label for="materia6_4">LAB. DE ALGORITMOS Y ESTRUCTURA DE DATOS</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia6_5" name="materias6[]" value="PROYECTO INTEGRADOR I">
+        <label for="materia6_5">PROYECTO INTEGRADOR I</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia6_6" name="materias6[]" value="SEMINARIO INFORMATICA">
+        <label for="materia6_6">SEMINARIO INFORMATICA</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia6_7" name="materias6[]" value="MINERIA DE DATOS">
+        <label for="materia6_7">MINERIA DE DATOS</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia6_8" name="materias6[]" value="INGLES PROFESIONAL">
+        <label for="materia6_8">INGLES PROFESIONAL</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia6_9" name="materias6[]" value="ESTADISTICA PARA INGENIEROS I">
+        <label for="materia6_9">ESTADISTICA PARA INGENIEROS I</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia6_10" name="materias6[]" value="ETICA PROFESIONAL">
+        <label for="materia6_10">ETICA PROFESIONAL</label>
+      </div>
+    </div>
+    <!-- Agrega más filas de materias aquí -->
+    <button type="submit" onclick="saveData(event, 'materiasForm6')">Guardar Materias</button>
+  </form>
+</div>
+ <!-- 7 cuatrimestre -->
+ <div class="container">
+  <h1>7 cuatrimestre</h1>
+  <form id="materiasForm7">
+    <!-- Materias del séptimo cuatrimestre -->
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia7_1" name="materias7[]" value="INTELIGENCIA ARTIFICIAL">
+        <label for="materia7_1">INTELIGENCIA ARTIFICIAL</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia7_2" name="materias7[]" value="LAB. DE INTELIGENCIA ARTIFICIAL">
+        <label for="materia7_2">LAB. DE INTELIGENCIA ARTIFICIAL</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia7_3" name="materias7[]" value="COMPUTACION GRAFICA">
+        <label for="materia7_3">COMPUTACION GRAFICA</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia7_4" name="materias7[]" value="METODOS NUMERICOS">
+        <label for="materia7_4">METODOS NUMERICOS</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia7_5" name="materias7[]" value="LAB. DE METODOS NUMERICOS">
+        <label for="materia7_5">LAB. DE METODOS NUMERICOS</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia7_6" name="materias7[]" value="METODOLOGIA AGIL">
+        <label for="materia7_6">METODOLOGIA AGIL</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia7_7" name="materias7[]" value="ESTADISTICA PARA INGENIEROS II">
+        <label for="materia7_7">ESTADISTICA PARA INGENIEROS II</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia7_8" name="materias7[]" value="INTELIGENCIA EMOCIONAL">
+        <label for="materia7_8">INTELIGENCIA EMOCIONAL</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia7_9" name="materias7[]" value="MEDIO AMBIENTE Y SOSTENIBILIDAD">
+        <label for="materia7_9">MEDIO AMBIENTE Y SOSTENIBILIDAD</label>
+      </div>
+    </div>
+    <button type="submit" onclick="saveData(event, 'materiasForm7')">Guardar Materias</button>
+  </form>
+</div>
+
+<!-- 8 cuatrimestre -->
+<div class="container">
+  <h1>8 cuatrimestre</h1>
+  <form id="materiasForm8">
+    <!-- Materias del octavo cuatrimestre -->
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia8_1" name="materias8[]" value="FINANZAS PERSONALES">
+        <label for="materia8_1">FINANZAS PERSONALES</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia8_2" name="materias8[]" value="INVESTIGACION OPERATIVA I">
+        <label for="materia8_2">INVESTIGACION OPERATIVA I</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia8_3" name="materias8[]" value="INGENIERIA SOFTWARE">
+        <label for="materia8_3">INGENIERIA SOFTWARE</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia8_4" name="materias8[]" value="AUDITORIA DE SISTEMAS INFORMATICOS">
+        <label for="materia8_4">AUDITORIA DE SISTEMAS INFORMATICOS</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia8_5" name="materias8[]" value="PROGRAMACION DE DISPOSITIVOS MOVILES">
+        <label for="materia8_5">PROGRAMACION DE DISPOSITIVOS MOVILES</label>
+      </div>
+    </div>
+    <button type="submit" onclick="saveData(event, 'materiasForm8')">Guardar Materias</button>
+  </form>
+</div>
+
+<!-- Noveno cuatrimestre -->
+<div class="container">
+  <h1>9 cuatrimestre</h1>
+  <form id="materiasForm9">
+    <!-- Materias del noveno cuatrimestre -->
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia9_1" name="materias9[]" value="LIDERAZGO Y DESEMPEÑO">
+        <label for="materia9_1">LIDERAZGO Y DESEMPEÑO</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia9_2" name="materias9[]" value="INVESTIGACION OPERATIVA II">
+        <label for="materia9_2">INVESTIGACION OPERATIVA II</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia9_3" name="materias9[]" value="GESTION DE PROYECTO INFORMATICO">
+        <label for="materia9_3">GESTION DE PROYECTO INFORMATICO</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia9_4" name="materias9[]" value="REDES Y COMUNICACIONES">
+        <label for="materia9_4">REDES Y COMUNICACIONES</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia9_5" name="materias9[]" value="LAB. DE REDES Y COMUNICACIONES">
+        <label for="materia9_5">LAB. DE REDES Y COMUNICACIONES</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia9_6" name="materias9[]" value="INGENIERIA DE SOFTWARE II">
+        <label for="materia9_6">INGENIERIA DE SOFTWARE II</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia9_7" name="materias9[]" value="PROGRAMACION DE VIDEO JUEGOS">
+        <label for="materia9_7">PROGRAMACION DE VIDEO JUEGOS</label>
+      </div>
+    </div>
+    <!-- Añade más materias según sea necesario -->
+    <button type="submit" onclick="saveData(event, 'materiasForm9')">Guardar Materias</button>
+  </form>
+</div>
+<!-- Décimo cuatrimestre -->
+<div class="container">
+  <h1>10 cuatrimestre</h1>
+  <form id="materiasForm10">
+    <!-- Materias del décimo cuatrimestre -->
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia10_1" name="materias10[]" value="FORMACION DE EMPRENDEDORES">
+        <label for="materia10_1">FORMACION DE EMPRENDEDORES</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia10_2" name="materias10[]" value="INGENIERIA ECONOMICA">
+        <label for="materia10_2">INGENIERIA ECONOMICA</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia10_3" name="materias10[]" value="TELECOMUNICACION DE DATOS">
+        <label for="materia10_3">TELECOMUNICACION DE DATOS</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia10_4" name="materias10[]" value="LAB. TELECOMUNICACION DATOS">
+        <label for="materia10_4">LAB. TELECOMUNICACION DATOS</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia10_5" name="materias10[]" value="ASEGURAMIENTOS DE CALIDAD DEL SOFTWARE">
+        <label for="materia10_5">ASEGURAMIENTOS DE CALIDAD DEL SOFTWARE</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia10_6" name="materias10[]" value="COMPILADORES">
+        <label for="materia10_6">COMPILADORES</label>
+      </div>
+    </div>
+    <!-- Añade más materias según sea necesario -->
+    <button type="submit" onclick="saveData(event, 'materiasForm10')">Guardar Materias</button>
+  </form>
+</div>
+<!-- Undécimo cuatrimestre -->
+<div class="container">
+  <h1>11 cuatrimestre</h1>
+  <form id="materiasForm11">
+    <!-- Materias del undécimo cuatrimestre -->
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia11_1" name="materias11[]" value="ANTEPROYECTO DE GRADO">
+        <label for="materia11_1">ANTEPROYECTO DE GRADO</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia11_2" name="materias11[]" value="DISEÑO Y EVALUACIÓN DE PROYECTOS">
+        <label for="materia11_2">DISEÑO Y EVALUACIÓN DE PROYECTOS</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia11_3" name="materias11[]" value="ALGORITMOS PARALELOS">
+        <label for="materia11_3">ALGORITMOS PARALELOS</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia11_4" name="materias11[]" value="SEGURIDAD INFORMATICA">
+        <label for="materia11_4">SEGURIDAD INFORMATICA</label>
+      </div>
+    </div>
+    <!-- Añade más materias según sea necesario -->
+    <button type="submit" onclick="saveData(event, 'materiasForm11')">Guardar Materias</button>
+  </form>
+</div>
+<!-- Duodécimo cuatrimestre -->
+<div class="container">
+  <h1>12 cuatrimestre</h1>
+  <form id="materiasForm12">
+    <!-- Materias del duodécimo cuatrimestre -->
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia12_1" name="materias12[]" value="CONTABILIDAD I">
+        <label for="materia12_1">CONTABILIDAD I</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia12_2" name="materias12[]" value="CIRCUITOS ELECT. I">
+        <label for="materia12_2">CIRCUITOS ELECT. I</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia12_3" name="materias12[]" value="TALLER DE CIRCUITOS ELECTRICOS I">
+        <label for="materia12_3">TALLER DE CIRCUITOS ELECTRICOS I</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia12_4" name="materias12[]" value="SISTEMA Y TECNOLOGIA DE INFORMACION">
+        <label for="materia12_4">SISTEMA Y TECNOLOGIA DE INFORMACION</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia12_5" name="materias12[]" value="DOMOTICA Y ENTORNO INTELIGENTE">
+        <label for="materia12_5">DOMOTICA Y ENTORNO INTELIGENTE</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia12_6" name="materias12[]" value="ADMINISTRACION DE NEGOCIOS ELECTRONICOS">
+        <label for="materia12_6">ADMINISTRACION DE NEGOCIOS ELECTRONICOS</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="materia12_7" name="materias12[]" value="ROBOTICA">
+        <label for="materia12_7">ROBOTICA</label>
+      </div>
+      <div class="col">
+        <input type="checkbox" id="materia12_8" name="materias12[]" value="BLOCKHAIN, CRIPTOMONEDAS Y METAVERSO">
+        <label for="materia12_8">BLOCKHAIN, CRIPTOMONEDAS Y METAVERSO</label>
+      </div>
+    </div>
+    <!-- Añade más materias según sea necesario -->
+    <button type="submit" onclick="saveData(event, 'materiasForm12')">Guardar Materias</button>
+  </form>
+</div>
+
+  <!-- Agrega más cuatrimestres con sus respectivas materias -->
+
+  <!-- Script de JavaScript -->
+  <script>
+    function saveData(event, formId) {
+      event.preventDefault();
+      const form = document.getElementById(formId);
+      const formData = new FormData(form);
+      const selectedSubjects = [];
+      for (const pair of formData.entries()) {
+        selectedSubjects.push(pair[1]);
+      }
+      localStorage.setItem(formId, JSON.stringify(selectedSubjects));
+      alert("Materias guardadas correctamente.");
+    }
+
+    window.onload = function() {
+      // Cargar datos guardados al cargar la página
+      for (let i = 1; i <= 12; i++) {
+        const savedData = localStorage.getItem(`materiasForm${i}`);
+        if (savedData) {
+          const selectedSubjects = JSON.parse(savedData);
+          const form = document.getElementById(`materiasForm${i}`);
+          for (const subject of selectedSubjects) {
+            const input = form.querySelector(`[value="${subject}"]`);
+            if (input) input.checked = true;
+          }
+        }
+      }
+    };
+  </script>
+</body>
+</html>
