@@ -1,642 +1,436 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R7</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Estilos adicionales para organizar las materias en filas */
-    .container {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .row {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .col {
-      margin-left: 10px; /* Espacio entre las materias */
-    }
-
-    .col:first-child {
-      margin-left: 0; /* No hay margen izquierdo para el primer elemento de la fila */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOCEL - Sistema de Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .division-tab.active { border-bottom: 4px solid #1e3a8a; color: #1e3a8a; font-weight: bold; }
+        .hidden { display: none !important; }
+    </style>
 </head>
-<body>
-  <div class="top-bar">
-    <div class="container">
-      <h2>R7</h2>
-    </div>
-  </div>
-  
-   <!-- 1 cuatrimestre -->
-   <div class="container">
-    <h1>1 cuatrimestre</h1>
-    <form id="materiasForm1">
-      <!-- Materias del primer cuatrimestre -->
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia1_1" name="materias1[]" value="LENGUA ESPAÑOLA I">
-          <label for="materia1_1">LENGUA ESPAÑOLA I</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia1_2" name="materias1[]" value="ALGORITMOS COMPUTACIONALES">
-          <label for="materia1_2">ALGORITMOS COMPUTACIONALES</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia1_3" name="materias1[]" value="INGLES I">
-          <label for="materia1_3">INGLES I</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia1_4" name="materias1[]" value="MATEMATICA DISCRETA">
-          <label for="materia1_4">MATEMATICA DISCRETA</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia1_5" name="materias1[]" value="PRE-CALCULO">
-          <label for="materia1_5">PRE-CALCULO</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia1_6" name="materias1[]" value="QUIMICA INORGANICA I">
-          <label for="materia1_6">QUIMICA INORGANICA I</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia1_7" name="materias1[]" value="LAB. QUIM. INORGAN. I">
-          <label for="materia1_7">LAB. QUIM. INORGAN. I</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia1_8" name="materias1[]" value="ORIENTACION UNIVERSITARIA">
-          <label for="materia1_8">ORIENTACION UNIVERSITARIA</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia1_9" name="materias1[]" value="REFLEXION FILOSOFICA">
-          <label for="materia1_9">REFLEXION FILOSOFICA</label>
-        </div>
-      </div>
-      <button type="submit" onclick="saveData(event, 'materiasForm1')">Guardar Materias</button>
-    </form>
-  </div>
-  
-  <!-- 2 cuatrimestre -->
-  <div class="container">
-    <h1>2 cuatrimestre</h1>
-    <form id="materiasForm2">
-      <!-- Materias del segundo cuatrimestre -->
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia2_1" name="materias2[]" value="LENGUA ESPAÑOLA II">
-          <label for="materia2_1">LENGUA ESPAÑOLA II</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia2_2" name="materias2[]" value="PROGRAMACION I">
-          <label for="materia2_2">PROGRAMACION I</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia2_3" name="materias2[]" value="LAB PROGRAMACION I">
-          <label for="materia2_3">LAB PROGRAMACION I</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia2_4" name="materias2[]" value="LOGICA COMPUTACIONAL">
-          <label for="materia2_4">LOGICA COMPUTACIONAL</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia2_5" name="materias2[]" value="INGLES II">
-          <label for="materia2_5">INGLES II</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia2_6" name="materias2[]" value="CALCULO I">
-          <label for="materia2_6">CALCULO I</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia2_7" name="materias2[]" value="FISICA I">
-          <label for="materia2_7">FISICA I</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia2_8" name="materias2[]" value="LAB. FISICA I">
-          <label for="materia2_8">LAB. FISICA I</label>
-        </div>
-      </div>
-      <button type="submit" onclick="saveData(event, 'materiasForm2')">Guardar Materias</button>
-    </form>
-  </div>
+<body class="bg-gray-100 min-h-screen">
 
-  <!-- 3 cuatrimestre -->
-  <div class="container">
-    <h1>3 cuatrimestre</h1>
-    <form id="materiasForm3">
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia3_1" name="materias3[]" value="REDACCION PROFESIONAL">
-          <label for="materia3_1">REDACCION PROFESIONAL</label>
+    <!-- Pantalla de Bloqueo -->
+    <div id="authOverlay" class="fixed inset-0 bg-blue-900 z-[100] flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
+            <div class="bg-blue-100 text-blue-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-black">B</div>
+            <h2 class="text-xl font-bold mb-2">Acceso Restringido</h2>
+            <p class="text-gray-500 text-sm mb-6">Ingrese la contraseña de BOCEL para continuar</p>
+            <input type="password" id="passInput" class="w-full border-2 border-gray-200 rounded-lg p-3 mb-4 text-center focus:border-blue-500 outline-none" placeholder="••••••">
+            <button onclick="checkAuth()" class="w-full bg-blue-900 text-white font-bold py-3 rounded-lg hover:bg-black transition">Entrar al Sistema</button>
+            <p id="authError" class="text-red-500 text-xs mt-3 hidden italic font-bold">Contraseña incorrecta</p>
         </div>
-        <div class="col">
-          <input type="checkbox" id="materia3_2" name="materias3[]" value="ANALISIS DE SISTEMAS">
-          <label for="materia3_2">ANALISIS DE SISTEMAS</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia3_3" name="materias3[]" value="PROGRAMACION II">
-          <label for="materia3_3">PROGRAMACION II</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia3_4" name="materias3[]" value="LAB PROGRAMACION II">
-          <label for="materia3_4">LAB PROGRAMACION II</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia3_5" name="materias3[]" value="INGLES III">
-          <label for="materia3_5">INGLES III</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia3_6" name="materias3[]" value="LOGICA MATEMATICA">
-          <label for="materia3_6">LOGICA MATEMATICA</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia3_7" name="materias3[]" value="CALCULO II">
-          <label for="materia3_7">CALCULO II</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia3_8" name="materias3[]" value="FISICA II">
-          <label for="materia3_8">FISICA II</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia3_9" name="materias3[]" value="LAB FISICA II">
-          <label for="materia3_9">LAB FISICA II</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia3_10" name="materias3[]" value="METODOLOGIA DE LA INVESTIGACION I">
-          <label for="materia3_10">METODOLOGIA DE LA INVESTIGACION I</label>
-        </div>
-      </div>
-      <button type="submit" onclick="saveData(event, 'materiasForm3')">Guardar Materias</button>
-    </form>
-  </div>
+    </div>
 
-  <!-- 4 cuatrimestre -->
-  <div class="container">
-    <h1>4 cuatrimestre</h1>
-    <form id="materiasForm4">
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia4_1" name="materias4[]" value="ELECTRICIDAD BASICA">
-          <label for="materia4_1">ELECTRICIDAD BASICA</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia4_2" name="materias4[]" value="TALLER ELECT. BASICA">
-          <label for="materia4_2">TALLER ELECT. BASICA</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia4_3" name="materias4[]" value="DISEÑO DE SISTEMAS">
-          <label for="materia4_3">DISEÑO DE SISTEMAS</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia4_4" name="materias4[]" value="PROGRAMACION III">
-          <label for="materia4_4">PROGRAMACION III</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia4_5" name="materias4[]" value="LAB. DE PROGRAMACION III">
-          <label for="materia4_5">LAB. DE PROGRAMACION III</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia4_6" name="materias4[]" value="BASE DE DATOS I">
-          <label for="materia4_6">BASE DE DATOS I</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia4_7" name="materias4[]" value="LAB. DE BASE DE DATOS I">
-          <label for="materia4_7">LAB. DE BASE DE DATOS I</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia4_8" name="materias4[]" value="INGLES IV">
-          <label for="materia4_8">INGLES IV</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia4_9" name="materias4[]" value="FUNDAMENTOS DE ESTADISTICA">
-          <label for="materia4_9">FUNDAMENTOS DE ESTADISTICA</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia4_10" name="materias4[]" value="CALCULO III">
-          <label for="materia4_10">CALCULO III</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia4_11" name="materias4[]" value="METODOLOGIA INVE. II">
-          <label for="materia4_11">METODOLOGIA INVE. II</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia4_12" name="materias4[]" value="TEMAS DE HISTORIA DOMINICANA">
-          <label for="materia4_12">TEMAS DE HISTORIA DOMINICANA</label>
-        </div>
-      </div>
-      <button type="submit" onclick="saveData(event, 'materiasForm4')">Guardar Materias</button>
-    </form>
-  </div>
+    <!-- Contenido Principal -->
+    <div id="mainContent" class="hidden">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-blue-900 text-white px-3 py-1 rounded font-black text-xl">BOCEL</span>
+                    <h1 class="font-bold text-gray-700 text-lg uppercase tracking-wider">Gestión de Eficiencia</h1>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="openConfig()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 p-2 rounded-lg transition" title="Configurar Nombres">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </button>
+                    <button onclick="openModal()" class="bg-blue-900 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-blue-800">
+                        Nuevo Registro
+                    </button>
+                    <button onclick="logout()" class="text-gray-400 hover:text-red-500 p-2">Salir</button>
+                </div>
+            </div>
+            
+            <!-- Tabs de Divisiones -->
+            <div class="max-w-7xl mx-auto px-4 overflow-x-auto border-t">
+                <nav id="divisionTabs" class="flex space-x-6 whitespace-nowrap">
+                    <button onclick="setDivision('TOTAL')" id="tab-TOTAL" class="division-tab active py-4 px-1 text-sm uppercase">TOTAL EMPRESA</button>
+                    <!-- Se llena dinámicamente -->
+                </nav>
+            </div>
+        </header>
 
-  <!-- 5 cuatrimestre -->
-  <div class="container">
-    <h1>5 cuatrimestre</h1>
-    <form id="materiasForm5">
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia5_1" name="materias5[]" value="DIBUJO TECNICO">
-          <label for="materia5_1">DIBUJO TECNICO</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia5_2" name="materias5[]" value="SEGURIDAD E HIGIENE INDUSTRIAL">
-          <label for="materia5_2">SEGURIDAD E HIGIENE INDUSTRIAL</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia5_3" name="materias5[]" value="ARQUITECTURA COMPUTACIONAL">
-          <label for="materia5_3">ARQUITECTURA COMPUTACIONAL</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia5_4" name="materias5[]" value="LAB. DE ARQUITECTURA COMPUTACIONAL">
-          <label for="materia5_4">LAB. DE ARQUITECTURA COMPUTACIONAL</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia5_5" name="materias5[]" value="BASE DE DATOS II">
-          <label for="materia5_5">BASE DE DATOS II</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia5_6" name="materias5[]" value="LAB. DE BASE DE DATOS II">
-          <label for="materia5_6">LAB. DE BASE DE DATOS II</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="checkbox" id="materia5_7" name="materias5[]" value="DISEÑO Y PROGRAMACION DE PAGINAS WEB">
-          <label for="materia5_7">DISEÑO Y PROGRAMACION DE PAGINAS WEB</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia5_8" name="materias5[]" value="CALCULO IV">
-          <label for="materia5_8">CALCULO IV</label>
-        </div>
-        <div class="col">
-          <input type="checkbox" id="materia5_9" name="materias5[]" value="CIUDADANIA Y GLOBALIZACION">
-          <label for="materia5_9">CIUDADANIA Y GLOBALIZACION</label>
-        </div>
-      </div>
-      <button type="submit" onclick="saveData(event, 'materiasForm5')">Guardar Materias</button>
-    </form>
-  </div>
+        <main class="max-w-7xl mx-auto px-4 py-6">
+            <!-- Filtros Superiores -->
+            <div class="bg-white p-4 rounded-xl shadow-sm mb-6 flex flex-wrap gap-4 items-end">
+                <div class="flex-1 min-w-[200px]">
+                    <label class="block text-xs font-bold text-gray-400 mb-1">RANGO DE FECHAS</label>
+                    <div class="flex gap-2">
+                        <input type="date" id="dateFrom" class="border rounded p-2 text-sm w-full">
+                        <input type="date" id="dateTo" class="border rounded p-2 text-sm w-full">
+                    </div>
+                </div>
+                <div class="flex gap-2 bg-gray-100 p-1 rounded-lg">
+                    <button onclick="filterByPreset('week')" class="px-3 py-1.5 text-xs font-bold rounded-md hover:bg-white transition">SEMANA</button>
+                    <button onclick="filterByPreset('month')" class="px-3 py-1.5 text-xs font-bold rounded-md hover:bg-white transition">MES</button>
+                    <button onclick="filterByPreset('year')" class="px-3 py-1.5 text-xs font-bold rounded-md hover:bg-white transition">AÑO</button>
+                    <button onclick="applyDateFilter()" class="px-4 py-1.5 bg-blue-900 text-white text-xs font-bold rounded-md">APLICAR</button>
+                </div>
+            </div>
 
- <!-- 6 cuatrimestre -->
-<div class="container">
-  <h1>6 cuatrimestre</h1>
-  <form id="materiasForm6">
-    <!-- Materias del sexto cuatrimestre -->
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia6_1" name="materias6[]" value="SISTEMA OPERATIVO I">
-        <label for="materia6_1">SISTEMA OPERATIVO I</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia6_2" name="materias6[]" value="LAB SISTEMA OPERATIVO I">
-        <label for="materia6_2">LAB SISTEMA OPERATIVO I</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia6_3" name="materias6[]" value="ALGORITMOS Y ESTRUCTURA DE DATOS">
-        <label for="materia6_3">ALGORITMOS Y ESTRUCTURA DE DATOS</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia6_4" name="materias6[]" value="LAB. DE ALGORITMOS Y ESTRUCTURA DE DATOS">
-        <label for="materia6_4">LAB. DE ALGORITMOS Y ESTRUCTURA DE DATOS</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia6_5" name="materias6[]" value="PROYECTO INTEGRADOR I">
-        <label for="materia6_5">PROYECTO INTEGRADOR I</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia6_6" name="materias6[]" value="SEMINARIO INFORMATICA">
-        <label for="materia6_6">SEMINARIO INFORMATICA</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia6_7" name="materias6[]" value="MINERIA DE DATOS">
-        <label for="materia6_7">MINERIA DE DATOS</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia6_8" name="materias6[]" value="INGLES PROFESIONAL">
-        <label for="materia6_8">INGLES PROFESIONAL</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia6_9" name="materias6[]" value="ESTADISTICA PARA INGENIEROS I">
-        <label for="materia6_9">ESTADISTICA PARA INGENIEROS I</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia6_10" name="materias6[]" value="ETICA PROFESIONAL">
-        <label for="materia6_10">ETICA PROFESIONAL</label>
-      </div>
-    </div>
-    <!-- Agrega más filas de materias aquí -->
-    <button type="submit" onclick="saveData(event, 'materiasForm6')">Guardar Materias</button>
-  </form>
-</div>
- <!-- 7 cuatrimestre -->
- <div class="container">
-  <h1>7 cuatrimestre</h1>
-  <form id="materiasForm7">
-    <!-- Materias del séptimo cuatrimestre -->
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia7_1" name="materias7[]" value="INTELIGENCIA ARTIFICIAL">
-        <label for="materia7_1">INTELIGENCIA ARTIFICIAL</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia7_2" name="materias7[]" value="LAB. DE INTELIGENCIA ARTIFICIAL">
-        <label for="materia7_2">LAB. DE INTELIGENCIA ARTIFICIAL</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia7_3" name="materias7[]" value="COMPUTACION GRAFICA">
-        <label for="materia7_3">COMPUTACION GRAFICA</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia7_4" name="materias7[]" value="METODOS NUMERICOS">
-        <label for="materia7_4">METODOS NUMERICOS</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia7_5" name="materias7[]" value="LAB. DE METODOS NUMERICOS">
-        <label for="materia7_5">LAB. DE METODOS NUMERICOS</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia7_6" name="materias7[]" value="METODOLOGIA AGIL">
-        <label for="materia7_6">METODOLOGIA AGIL</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia7_7" name="materias7[]" value="ESTADISTICA PARA INGENIEROS II">
-        <label for="materia7_7">ESTADISTICA PARA INGENIEROS II</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia7_8" name="materias7[]" value="INTELIGENCIA EMOCIONAL">
-        <label for="materia7_8">INTELIGENCIA EMOCIONAL</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia7_9" name="materias7[]" value="MEDIO AMBIENTE Y SOSTENIBILIDAD">
-        <label for="materia7_9">MEDIO AMBIENTE Y SOSTENIBILIDAD</label>
-      </div>
-    </div>
-    <button type="submit" onclick="saveData(event, 'materiasForm7')">Guardar Materias</button>
-  </form>
-</div>
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-8 border-blue-900">
+                    <p class="text-xs font-bold text-gray-400 uppercase">Impacto Financiero</p>
+                    <h2 id="stat-total" class="text-3xl font-black text-gray-800 mt-1">$0.00</h2>
+                    <p id="current-view-label" class="text-xs font-bold text-blue-800 mt-1">TOTAL EMPRESA</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-8 border-amber-500">
+                    <p class="text-xs font-bold text-gray-400 uppercase">Reprocesos</p>
+                    <h2 id="stat-reproceso" class="text-3xl font-black text-amber-600 mt-1">$0.00</h2>
+                    <span id="count-reproceso" class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold uppercase">0 REGISTROS</span>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-8 border-red-500">
+                    <p class="text-xs font-bold text-gray-400 uppercase">Desperdicios</p>
+                    <h2 id="stat-desperdicio" class="text-3xl font-black text-red-600 mt-1">$0.00</h2>
+                    <span id="count-desperdicio" class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold uppercase">0 REGISTROS</span>
+                </div>
+            </div>
 
-<!-- 8 cuatrimestre -->
-<div class="container">
-  <h1>8 cuatrimestre</h1>
-  <form id="materiasForm8">
-    <!-- Materias del octavo cuatrimestre -->
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia8_1" name="materias8[]" value="FINANZAS PERSONALES">
-        <label for="materia8_1">FINANZAS PERSONALES</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia8_2" name="materias8[]" value="INVESTIGACION OPERATIVA I">
-        <label for="materia8_2">INVESTIGACION OPERATIVA I</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia8_3" name="materias8[]" value="INGENIERIA SOFTWARE">
-        <label for="materia8_3">INGENIERIA SOFTWARE</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia8_4" name="materias8[]" value="AUDITORIA DE SISTEMAS INFORMATICOS">
-        <label for="materia8_4">AUDITORIA DE SISTEMAS INFORMATICOS</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia8_5" name="materias8[]" value="PROGRAMACION DE DISPOSITIVOS MOVILES">
-        <label for="materia8_5">PROGRAMACION DE DISPOSITIVOS MOVILES</label>
-      </div>
-    </div>
-    <button type="submit" onclick="saveData(event, 'materiasForm8')">Guardar Materias</button>
-  </form>
-</div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Gráfica -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="font-bold text-gray-700 mb-6 flex justify-between">
+                        Distribución de Costos
+                        <span class="text-xs font-normal text-gray-400">Basado en filtros</span>
+                    </h3>
+                    <div class="h-64">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
 
-<!-- Noveno cuatrimestre -->
-<div class="container">
-  <h1>9 cuatrimestre</h1>
-  <form id="materiasForm9">
-    <!-- Materias del noveno cuatrimestre -->
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia9_1" name="materias9[]" value="LIDERAZGO Y DESEMPEÑO">
-        <label for="materia9_1">LIDERAZGO Y DESEMPEÑO</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia9_2" name="materias9[]" value="INVESTIGACION OPERATIVA II">
-        <label for="materia9_2">INVESTIGACION OPERATIVA II</label>
-      </div>
+                <!-- Historial -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm overflow-hidden flex flex-col">
+                    <div class="p-4 border-b flex justify-between items-center bg-gray-50">
+                        <h3 class="font-bold text-gray-700">Listado de Datos</h3>
+                        <button onclick="clearAllData()" class="text-xs font-bold text-red-500 hover:text-red-700">BORRAR TODO EL HISTORIAL</button>
+                    </div>
+                    <div class="overflow-x-auto flex-grow max-h-[500px]">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-white sticky top-0 z-10 border-b">
+                                <tr class="text-[10px] text-gray-400 font-bold uppercase">
+                                    <th class="px-6 py-4">Fecha</th>
+                                    <th class="px-6 py-4">División</th>
+                                    <th class="px-6 py-4">Categoría</th>
+                                    <th class="px-6 py-4">Costo</th>
+                                    <th class="px-6 py-4 text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTableBody" class="divide-y">
+                                <!-- Datos dinámicos -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia9_3" name="materias9[]" value="GESTION DE PROYECTO INFORMATICO">
-        <label for="materia9_3">GESTION DE PROYECTO INFORMATICO</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia9_4" name="materias9[]" value="REDES Y COMUNICACIONES">
-        <label for="materia9_4">REDES Y COMUNICACIONES</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia9_5" name="materias9[]" value="LAB. DE REDES Y COMUNICACIONES">
-        <label for="materia9_5">LAB. DE REDES Y COMUNICACIONES</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia9_6" name="materias9[]" value="INGENIERIA DE SOFTWARE II">
-        <label for="materia9_6">INGENIERIA DE SOFTWARE II</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia9_7" name="materias9[]" value="PROGRAMACION DE VIDEO JUEGOS">
-        <label for="materia9_7">PROGRAMACION DE VIDEO JUEGOS</label>
-      </div>
-    </div>
-    <!-- Añade más materias según sea necesario -->
-    <button type="submit" onclick="saveData(event, 'materiasForm9')">Guardar Materias</button>
-  </form>
-</div>
-<!-- Décimo cuatrimestre -->
-<div class="container">
-  <h1>10 cuatrimestre</h1>
-  <form id="materiasForm10">
-    <!-- Materias del décimo cuatrimestre -->
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia10_1" name="materias10[]" value="FORMACION DE EMPRENDEDORES">
-        <label for="materia10_1">FORMACION DE EMPRENDEDORES</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia10_2" name="materias10[]" value="INGENIERIA ECONOMICA">
-        <label for="materia10_2">INGENIERIA ECONOMICA</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia10_3" name="materias10[]" value="TELECOMUNICACION DE DATOS">
-        <label for="materia10_3">TELECOMUNICACION DE DATOS</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia10_4" name="materias10[]" value="LAB. TELECOMUNICACION DATOS">
-        <label for="materia10_4">LAB. TELECOMUNICACION DATOS</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia10_5" name="materias10[]" value="ASEGURAMIENTOS DE CALIDAD DEL SOFTWARE">
-        <label for="materia10_5">ASEGURAMIENTOS DE CALIDAD DEL SOFTWARE</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia10_6" name="materias10[]" value="COMPILADORES">
-        <label for="materia10_6">COMPILADORES</label>
-      </div>
-    </div>
-    <!-- Añade más materias según sea necesario -->
-    <button type="submit" onclick="saveData(event, 'materiasForm10')">Guardar Materias</button>
-  </form>
-</div>
-<!-- Undécimo cuatrimestre -->
-<div class="container">
-  <h1>11 cuatrimestre</h1>
-  <form id="materiasForm11">
-    <!-- Materias del undécimo cuatrimestre -->
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia11_1" name="materias11[]" value="ANTEPROYECTO DE GRADO">
-        <label for="materia11_1">ANTEPROYECTO DE GRADO</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia11_2" name="materias11[]" value="DISEÑO Y EVALUACIÓN DE PROYECTOS">
-        <label for="materia11_2">DISEÑO Y EVALUACIÓN DE PROYECTOS</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia11_3" name="materias11[]" value="ALGORITMOS PARALELOS">
-        <label for="materia11_3">ALGORITMOS PARALELOS</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia11_4" name="materias11[]" value="SEGURIDAD INFORMATICA">
-        <label for="materia11_4">SEGURIDAD INFORMATICA</label>
-      </div>
-    </div>
-    <!-- Añade más materias según sea necesario -->
-    <button type="submit" onclick="saveData(event, 'materiasForm11')">Guardar Materias</button>
-  </form>
-</div>
-<!-- Duodécimo cuatrimestre -->
-<div class="container">
-  <h1>12 cuatrimestre</h1>
-  <form id="materiasForm12">
-    <!-- Materias del duodécimo cuatrimestre -->
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia12_1" name="materias12[]" value="CONTABILIDAD I">
-        <label for="materia12_1">CONTABILIDAD I</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia12_2" name="materias12[]" value="CIRCUITOS ELECT. I">
-        <label for="materia12_2">CIRCUITOS ELECT. I</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia12_3" name="materias12[]" value="TALLER DE CIRCUITOS ELECTRICOS I">
-        <label for="materia12_3">TALLER DE CIRCUITOS ELECTRICOS I</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia12_4" name="materias12[]" value="SISTEMA Y TECNOLOGIA DE INFORMACION">
-        <label for="materia12_4">SISTEMA Y TECNOLOGIA DE INFORMACION</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia12_5" name="materias12[]" value="DOMOTICA Y ENTORNO INTELIGENTE">
-        <label for="materia12_5">DOMOTICA Y ENTORNO INTELIGENTE</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia12_6" name="materias12[]" value="ADMINISTRACION DE NEGOCIOS ELECTRONICOS">
-        <label for="materia12_6">ADMINISTRACION DE NEGOCIOS ELECTRONICOS</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="materia12_7" name="materias12[]" value="ROBOTICA">
-        <label for="materia12_7">ROBOTICA</label>
-      </div>
-      <div class="col">
-        <input type="checkbox" id="materia12_8" name="materias12[]" value="BLOCKHAIN, CRIPTOMONEDAS Y METAVERSO">
-        <label for="materia12_8">BLOCKHAIN, CRIPTOMONEDAS Y METAVERSO</label>
-      </div>
-    </div>
-    <!-- Añade más materias según sea necesario -->
-    <button type="submit" onclick="saveData(event, 'materiasForm12')">Guardar Materias</button>
-  </form>
-</div>
 
-  <!-- Agrega más cuatrimestres con sus respectivas materias -->
+    <!-- Modales -->
+    <!-- Modal: Ingreso de Datos -->
+    <div id="modalData" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl">
+            <h2 class="text-xl font-bold mb-6 text-blue-900">Registrar Información Semanal</h2>
+            <form id="dataForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">División Responsable</label>
+                    <select id="form-division" class="w-full border rounded-lg p-2 bg-gray-50 outline-none focus:ring-2 focus:ring-blue-900" required></select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Categoría</label>
+                        <select id="form-type" class="w-full border rounded-lg p-2 bg-gray-50 outline-none focus:ring-2 focus:ring-blue-900" required>
+                            <option value="reproceso">Reproceso</option>
+                            <option value="desperdicio">Desperdicio</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Fecha</label>
+                        <input type="date" id="form-date" class="w-full border rounded-lg p-2 bg-gray-50 outline-none focus:ring-2 focus:ring-blue-900" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Costo Estimado ($)</label>
+                    <input type="number" id="form-cost" step="0.01" class="w-full border rounded-lg p-3 text-lg font-bold bg-gray-50 outline-none focus:ring-2 focus:ring-blue-900" placeholder="0.00" required>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Detalle (Opcional)</label>
+                    <textarea id="form-note" class="w-full border rounded-lg p-2 bg-gray-50 h-20 outline-none focus:ring-2 focus:ring-blue-900"></textarea>
+                </div>
+                <div class="flex gap-2 pt-4">
+                    <button type="button" onclick="closeModal()" class="flex-1 py-3 text-gray-500 font-bold hover:bg-gray-100 rounded-lg">Cancelar</button>
+                    <button type="submit" class="flex-1 py-3 bg-blue-900 text-white font-bold rounded-lg hover:bg-black">Guardar Datos</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-  <!-- Script de JavaScript -->
-  <script>
-    function saveData(event, formId) {
-      event.preventDefault();
-      const form = document.getElementById(formId);
-      const formData = new FormData(form);
-      const selectedSubjects = [];
-      for (const pair of formData.entries()) {
-        selectedSubjects.push(pair[1]);
-      }
-      localStorage.setItem(formId, JSON.stringify(selectedSubjects));
-      alert("Materias guardadas correctamente.");
-    }
+    <!-- Modal: Configuración de Nombres -->
+    <div id="modalConfig" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl">
+            <h2 class="text-xl font-bold mb-4 text-blue-900">Configurar Divisiones</h2>
+            <p class="text-sm text-gray-500 mb-6">Actualiza los nombres de las 4 partes de la empresa.</p>
+            <div class="space-y-3">
+                <input type="text" id="divName0" class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-900 outline-none" placeholder="Nombre de la división 1">
+                <input type="text" id="divName1" class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-900 outline-none" placeholder="Nombre de la división 2">
+                <input type="text" id="divName2" class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-900 outline-none" placeholder="Nombre de la división 3">
+                <input type="text" id="divName3" class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-900 outline-none" placeholder="Nombre de la división 4">
+            </div>
+            <div class="flex gap-2 mt-6">
+                <button onclick="closeConfig()" class="flex-1 py-2 font-bold text-gray-500 rounded hover:bg-gray-100">Cerrar</button>
+                <button onclick="saveDivisionNames()" class="flex-1 py-2 bg-blue-900 text-white font-bold rounded hover:bg-black">Guardar Nombres</button>
+            </div>
+        </div>
+    </div>
 
-    window.onload = function() {
-      // Cargar datos guardados al cargar la página
-      for (let i = 1; i <= 12; i++) {
-        const savedData = localStorage.getItem(`materiasForm${i}`);
-        if (savedData) {
-          const selectedSubjects = JSON.parse(savedData);
-          const form = document.getElementById(`materiasForm${i}`);
-          for (const subject of selectedSubjects) {
-            const input = form.querySelector(`[value="${subject}"]`);
-            if (input) input.checked = true;
-          }
+    <script>
+        // --- ESTADO INICIAL ---
+        const MASTER_PASS = "203031";
+        let divisions = JSON.parse(localStorage.getItem('bocel_divisions')) || ["La Dominicana", "Molino", "Proga", "PAM"];
+        let logs = JSON.parse(localStorage.getItem('bocel_logs')) || [];
+        let currentView = "TOTAL";
+        let dateFilter = { from: null, to: null };
+        let chart = null;
+
+        // --- AUTENTICACIÓN ---
+        function checkAuth() {
+            const input = document.getElementById('passInput').value;
+            if(input === MASTER_PASS) {
+                document.getElementById('authOverlay').classList.add('hidden');
+                document.getElementById('mainContent').classList.remove('hidden');
+                initSystem();
+            } else {
+                const err = document.getElementById('authError');
+                err.classList.remove('hidden');
+                setTimeout(() => err.classList.add('hidden'), 2000);
+            }
         }
-      }
-    };
-  </script>
+
+        function logout() {
+            location.reload();
+        }
+
+        // --- SISTEMA ---
+        function initSystem() {
+            updateDivisionUI();
+            render();
+            document.getElementById('form-date').valueAsDate = new Date();
+        }
+
+        function updateDivisionUI() {
+            // Actualizar Tabs
+            const tabsContainer = document.getElementById('divisionTabs');
+            tabsContainer.innerHTML = `<button onclick="setDivision('TOTAL')" id="tab-TOTAL" class="division-tab ${currentView === 'TOTAL' ? 'active' : ''} py-4 px-1 text-sm uppercase">TOTAL EMPRESA</button>`;
+            
+            // Actualizar Select de Formulario
+            const select = document.getElementById('form-division');
+            select.innerHTML = '';
+
+            divisions.forEach(div => {
+                const tabBtn = document.createElement('button');
+                tabBtn.innerText = div;
+                tabBtn.id = `tab-${div.replace(/\s/g, '_')}`;
+                tabBtn.className = `division-tab ${currentView === div ? 'active' : ''} py-4 px-1 text-sm uppercase`;
+                tabBtn.onclick = () => setDivision(div);
+                tabsContainer.appendChild(tabBtn);
+
+                const option = document.createElement('option');
+                option.value = div;
+                option.innerText = div;
+                select.appendChild(option);
+            });
+        }
+
+        function setDivision(name) {
+            currentView = name;
+            updateDivisionUI();
+            document.getElementById('current-view-label').innerText = name === 'TOTAL' ? 'TOTAL EMPRESA' : name;
+            render();
+        }
+
+        // --- CONFIGURACIÓN ---
+        function openConfig() {
+            document.getElementById('modalConfig').classList.remove('hidden');
+            divisions.forEach((d, i) => {
+                document.getElementById(`divName${i}`).value = d;
+            });
+        }
+
+        function closeConfig() { document.getElementById('modalConfig').classList.add('hidden'); }
+
+        function saveDivisionNames() {
+            const newNames = [];
+            for(let i=0; i<4; i++) {
+                const val = document.getElementById(`divName${i}`).value.trim();
+                newNames.push(val || `División ${i+1}`);
+            }
+            
+            // Si el nombre actual cambió, actualizar registros antiguos
+            logs.forEach(log => {
+                const idx = divisions.indexOf(log.division);
+                if(idx !== -1) log.division = newNames[idx];
+            });
+
+            divisions = newNames;
+            localStorage.setItem('bocel_divisions', JSON.stringify(divisions));
+            localStorage.setItem('bocel_logs', JSON.stringify(logs));
+            
+            updateDivisionUI();
+            render();
+            closeConfig();
+        }
+
+        // --- FILTROS ---
+        function filterByPreset(preset) {
+            const now = new Date();
+            const from = new Date();
+            if(preset === 'week') from.setDate(now.getDate() - 7);
+            if(preset === 'month') from.setMonth(now.getMonth() - 1);
+            if(preset === 'year') from.setFullYear(now.getFullYear() - 1);
+            
+            document.getElementById('dateFrom').valueAsDate = from;
+            document.getElementById('dateTo').valueAsDate = now;
+            applyDateFilter();
+        }
+
+        function applyDateFilter() {
+            const f = document.getElementById('dateFrom').value;
+            const t = document.getElementById('dateTo').value;
+            dateFilter = (f && t) ? { from: new Date(f + "T00:00:00"), to: new Date(t + "T23:59:59") } : { from: null, to: null };
+            render();
+        }
+
+        // --- CRUD DATOS ---
+        function openModal() { document.getElementById('modalData').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('modalData').classList.add('hidden'); }
+
+        document.getElementById('dataForm').onsubmit = function(e) {
+            e.preventDefault();
+            const record = {
+                id: Date.now(),
+                division: document.getElementById('form-division').value,
+                type: document.getElementById('form-type').value,
+                date: document.getElementById('form-date').value,
+                cost: parseFloat(document.getElementById('form-cost').value),
+                note: document.getElementById('form-note').value
+            };
+            logs.push(record);
+            saveData();
+            closeModal();
+            this.reset();
+            document.getElementById('form-date').valueAsDate = new Date();
+            render();
+        };
+
+        function deleteItem(id) {
+            if(confirm("¿Eliminar este registro permanentemente?")) {
+                logs = logs.filter(l => l.id !== id);
+                saveData();
+                render();
+            }
+        }
+
+        function clearAllData() {
+            if(confirm("¡ATENCIÓN! Se borrará todo el historial de datos de la empresa. Esta acción no se puede deshacer. ¿Desea continuar?")) {
+                logs = [];
+                saveData();
+                render();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('bocel_logs', JSON.stringify(logs));
+        }
+
+        // --- RENDERIZADO ---
+        function render() {
+            let filtered = logs;
+
+            if(currentView !== "TOTAL") {
+                filtered = filtered.filter(l => l.division === currentView);
+            }
+
+            if(dateFilter.from && dateFilter.to) {
+                filtered = filtered.filter(l => {
+                    const d = new Date(l.date);
+                    return d >= dateFilter.from && d <= dateFilter.to;
+                });
+            }
+
+            let sRep = 0, sDes = 0, cRep = 0, cDes = 0;
+            const body = document.getElementById('dataTableBody');
+            body.innerHTML = '';
+
+            filtered.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(l => {
+                if(l.type === 'reproceso') { sRep += l.cost; cRep++; }
+                else { sDes += l.cost; cDes++; }
+
+                body.innerHTML += `
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-6 py-4 text-gray-400 font-medium">${new Date(l.date).toLocaleDateString()}</td>
+                        <td class="px-6 py-4 font-bold text-gray-700">${l.division}</td>
+                        <td class="px-6 py-4">
+                            <span class="${l.type === 'reproceso' ? 'bg-amber-50 text-amber-600' : 'bg-red-50 text-red-600'} px-2 py-0.5 rounded text-[10px] font-black uppercase">
+                                ${l.type}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 font-black text-gray-900">$${l.cost.toLocaleString(undefined, {minimumFractionDigits:2})}</td>
+                        <td class="px-6 py-4 text-right">
+                            <button onclick="deleteItem(${l.id})" class="text-gray-300 hover:text-red-500 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            if(filtered.length === 0) {
+                body.innerHTML = `<tr><td colspan="5" class="py-12 text-center text-gray-400 italic">No hay registros con los filtros actuales</td></tr>`;
+            }
+
+            document.getElementById('stat-total').innerText = `$${(sRep + sDes).toLocaleString(undefined, {minimumFractionDigits:2})}`;
+            document.getElementById('stat-reproceso').innerText = `$${sRep.toLocaleString(undefined, {minimumFractionDigits:2})}`;
+            document.getElementById('stat-desperdicio').innerText = `$${sDes.toLocaleString(undefined, {minimumFractionDigits:2})}`;
+            document.getElementById('count-reproceso').innerText = `${cRep} REGISTROS`;
+            document.getElementById('count-desperdicio').innerText = `${cDes} REGISTROS`;
+
+            updateChart(sRep, sDes);
+        }
+
+        function updateChart(r, d) {
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            if(chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Reprocesos', 'Desperdicios'],
+                    datasets: [{
+                        data: [r || 1, d || 1], // Un poco de color si está vacío
+                        backgroundColor: ['#f59e0b', '#ef4444'],
+                        borderWidth: 5,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+    </script>
 </body>
 </html>
+
+```
